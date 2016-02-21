@@ -12,14 +12,14 @@
  *  GNU General Public License for more details.
  *
  */
-#include "../ssp.h"
+#include "ssp.h"
 
 /*************************************************************************/
 /* factory Sysfs                                                         */
 /*************************************************************************/
 
-#define VENDOR		"STM"
-#define CHIP_ID		"K6DS3TR"
+#define VENDOR		"INVENSENSE"
+#define CHIP_ID		"ICM20610"
 
 #define CALIBRATION_FILE_PATH	"/efs/FactoryApp/calibration_data"
 #define CALIBRATION_DATA_AMOUNT	20
@@ -370,10 +370,10 @@ static ssize_t accel_hw_selftest_show(struct device *dev,
 	pr_info("[SSP] %s - %d, %d, %d, %d, %d\n", __func__,
 		init_status, result, shift_ratio[0], shift_ratio[1], shift_ratio[2]);
 
-	return sprintf(buf, "%d,%d,%d,%d\n", result,
-		shift_ratio[0],
-		shift_ratio[1],
-		shift_ratio[2]);
+	return sprintf(buf, "%d,%d.%d,%d.%d,%d.%d\n", result,
+		shift_ratio[0] / 10, shift_ratio[0] % 10,
+		shift_ratio[1] / 10, shift_ratio[1] % 10,
+		shift_ratio[2] / 10, shift_ratio[2] % 10);
 exit:
 	return sprintf(buf, "%d,%d,%d,%d\n", -5, 0, 0, 0);
 }
