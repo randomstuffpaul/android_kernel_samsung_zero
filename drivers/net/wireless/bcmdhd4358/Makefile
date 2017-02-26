@@ -207,13 +207,11 @@ DHDCFLAGS += -DSUPPORT_TRIGGER_HANG_EVENT
 CANDIDATE_VERSION_PATH := ./../../build/core ../../../../../../build/core out
 FOUND_VERSION_PATH := $(foreach dir,$(CANDIDATE_VERSION_PATH), $(wildcard $(dir)/version_defaults.mk))
 FOUND_VERSION_PATH := $(word 1, $(FOUND_VERSION_PATH))
-ifeq ($(FOUND_VERSION_PATH),)
-$(warning Not found Android version file. Set as Legacy mode)
-DHDCFLAGS += -DDHD_LEGACY_FILE_PATH
-DHDCFLAGS += -DDHD_DISABLE_ANDROID_FEATURE_SET
-else
 # Extract version string and get major number
 ANDROID_PLATFORM_VERSION := $(shell grep "PLATFORM_VERSION := " $(FOUND_VERSION_PATH) | cut -d "=" -f 2 | cut -d "." -f 1 | sed 's/ //g')
+ifeq ($(ANDROID_PLATFORM_VERSION),)
+ANDROID_PLATFORM_VERSION := 7.1.1
+endif
 $(warning Android Platform Version : $(ANDROID_PLATFORM_VERSION))
 # If Android version lower than 7(Nougat) => Use Legacy File path
 ifeq ($(shell expr $(ANDROID_PLATFORM_VERSION) \< 7),1)
@@ -222,7 +220,6 @@ DHDCFLAGS += -DDHD_DISABLE_ANDROID_FEATURE_SET
 $(warning Will be use Legacy file path)
 else
 DHDCFLAGS += -DDHD_SET_COUNTRY_SUPPORT
-endif
 endif
 
 ##############################
