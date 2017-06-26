@@ -212,7 +212,7 @@ ANDROID_PLATFORM_VERSION := $(shell grep "PLATFORM_VERSION := " $(FOUND_VERSION_
 ifeq ($(ANDROID_PLATFORM_VERSION),)
 ANDROID_PLATFORM_VERSION := 7.1.1
 endif
-$(warning Android Platform Version : $(ANDROID_PLATFORM_VERSION))
+#$(warning Android Platform Version : $(ANDROID_PLATFORM_VERSION))
 # If Android version lower than 7(Nougat) => Use Legacy File path
 ifeq ($(shell expr $(ANDROID_PLATFORM_VERSION) \< 7),1)
 DHDCFLAGS += -DDHD_LEGACY_FILE_PATH
