@@ -3718,7 +3718,6 @@ CONFIG_EXYNOS_IOMMU_EVENT_LOG=y
 # Remoteproc drivers
 #
 # CONFIG_STE_MODEM_RPROC is not set
-
 #
 # Rpmsg drivers
 #
@@ -4366,10 +4365,7 @@ CONFIG_HAVE_ARCH_KGDB=y
 #
 # Samsung Rooting Restriction Feature
 #
-CONFIG_SEC_RESTRICT_ROOTING=y
-CONFIG_SEC_RESTRICT_SETUID=y
-CONFIG_SEC_RESTRICT_FORK=y
-CONFIG_SEC_RESTRICT_ROOTING_LOG=y
+# CONFIG_SEC_RESTRICT_ROOTING is not set
 
 #
 # Security options
